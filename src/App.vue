@@ -1,9 +1,9 @@
 <template>
   <h1 class="text-center mt-3">who Is this Pokemon</h1>
-  <p class="text-center">Game about, who is this pokemon. By: Fernando Piedra Mendez &lt;OnlyKal&gt;</p>
+  <p class="text-center">Game about, guess what pokemon it is. By: Fernando Piedra Mendez &lt;OnlyKal&gt;</p>
   <div class="d-flex justify-content-center mt-3">
-    <h3 class="m-3">Corrects: {{corrects}}</h3>
-    <h3 class="m-3">Errors: {{errors}}</h3>
+    <h3 class="m-3">hits: {{corrects}}</h3>
+    <h3 class="m-3">mistakes: {{errors}}</h3>
   </div>
   <div class="d-flex justify-content-center mt-5">
     <Pokemon :nombre="nameAnsware" :img="img" :status="status" />
