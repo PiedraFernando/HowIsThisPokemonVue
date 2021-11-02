@@ -1,6 +1,6 @@
 <template>
-  <h1 class="text-center mt-3">How Is this Pokemon</h1>
-  <p class="text-center">Game about, how is this pokemon. By: Fernando Piedra Mendez &lt;OnlyKal&gt;</p>
+  <h1 class="text-center mt-3">who Is this Pokemon</h1>
+  <p class="text-center">Game about, who is this pokemon. By: Fernando Piedra Mendez &lt;OnlyKal&gt;</p>
   <div class="d-flex justify-content-center mt-3">
     <h3 class="m-3">Corrects: {{corrects}}</h3>
     <h3 class="m-3">Errors: {{errors}}</h3>
@@ -8,7 +8,7 @@
   <div class="d-flex justify-content-center mt-5">
     <Pokemon :nombre="nameAnsware" :img="img" :status="status" />
   </div>
-  <h2 class="text-center mt-3">How is?</h2>
+  <h2 class="text-center mt-3">who is?</h2>
   <div class="d-flex justify-content-center mt-5">
     <button type="button" class="btn btn-outline-secondary m-2" @click="check1">{{name1}}</button>
     <button type="button" class="btn btn-outline-secondary m-2" @click="check2">{{name2}}</button>
