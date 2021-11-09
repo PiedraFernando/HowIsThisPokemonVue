@@ -1,8 +1,16 @@
 <template>
     <div>
-        <template v-if="status == true">
-            <img :src="img" :alt="nombre">
-            <p class="text-center">{{nombre}}</p>
+        <template v-if="status === 'correct'">
+            <div class="border border-success">
+                <img :src="img" :alt="nombre">
+                <p class="text-center">{{nombre}}</p>
+            </div>
+        </template>
+        <template v-else-if="status === 'mistake'">
+            <div class="border border-danger">
+                <img class="gray" :src="img" :alt="nombre">
+                <p class="text-center">????????</p>
+            </div>
         </template>
         <template v-else>
             <img class="gray" :src="img" :alt="nombre">

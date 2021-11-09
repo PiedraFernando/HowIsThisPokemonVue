@@ -5,8 +5,19 @@
     <h3 class="m-3">hits: {{corrects}}</h3>
     <h3 class="m-3">mistakes: {{errors}}</h3>
   </div>
-  <div class="d-flex justify-content-center mt-5">
-    <Pokemon :nombre="nameAnsware" :img="img" :status="status" />
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="d-flex justify-content-center mt-5">
+        <Pokemon :nombre="nameAnsware" :img="img" :status="status"/>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="d-flex justify-content-center flex-column">
+        <NumberComponent @changeNumber="setGeneration($event)" maxNumber="7" title="Generation"/>
+        <NumberComponent @changeNumber="setDifficulty($event)" maxNumber="2" title="Difficulty" class="m-3"/>
+      </div>
+    </div>
   </div>
   <h2 class="text-center mt-3">who is?</h2>
   <div class="d-flex justify-content-center mt-5">
@@ -18,18 +29,22 @@
 
 <script>
 import Pokemon from "./components/Pokemon.vue";
+import NumberComponent from "./components/NumberComponent.vue"
 
 export default {
   name: 'App',
   components: {
-    Pokemon
+    Pokemon,
+    NumberComponent
   },
   data(){
     return{
+      maxPokemon:151,
+      difficulty:1,
       nameAnsware: null,
       errors:0,
       corrects:0,
-      status: false,
+      status: 'ask',
       name1: null,
       name2: null,
       name3: null,
@@ -41,11 +56,19 @@ export default {
   },
   methods:{
     getAskPokemon(){
-      fetch('https://pokeapi.co/api/v2/pokemon/' + (Math.floor(Math.random() * 151) + 1))
+      this.status = 'ask'
+      fetch('https://pokeapi.co/api/v2/pokemon/' + (Math.floor(Math.random() * this.maxPokemon) + 1))
         .then(response => response.json())
         .then(data => {
           let num = Math.floor(Math.random() * 3) + 1
-          this.img = data.sprites.front_default
+          if(this.difficulty === 1){
+            this.img = data.sprites.front_default
+          }else{
+            this.img = data.sprites.back_default
+            if(!this.img){
+              this.img = data.sprites.front_default
+            }
+          }
           this.nameAnsware = data.name
           if(num === 1){
             this.name1 = data.name
@@ -82,36 +105,72 @@ export default {
     check1(){
       if(this.nameAnsware === this.name1){
         this.corrects ++;
+        this.status = 'correct'
       }else{
         this.errors ++;
+        this.status = 'mistake'
       }
       this.restartName()
     },
     check2(){
       if(this.nameAnsware === this.name2){
         this.corrects ++;
+        this.status = 'correct'
       }else{
         this.errors ++;
+        this.status = 'mistake'
       }
       this.restartName()
     },
     check3(){
       if(this.nameAnsware === this.name3){
         this.corrects ++;
+        this.status = 'correct'
       }else{
         this.errors ++;
+        this.status = 'mistake'
       }
       this.restartName()
     },
     restartName(){
-      this.status = true
       setTimeout(() => {
         this.name1 = null
         this.name2 = null
         this.name3 = null
         this.status = false
         this.getAskPokemon()
-      }, 1000);
+      }, 1100);
+    },
+    setGeneration(val){
+      switch (val) {
+        case 1:
+            this.maxPokemon=151
+          break;
+        case 2:
+            this.maxPokemon=251
+          break;
+        case 3:
+            this.maxPokemon=386
+          break;
+        case 4:
+            this.maxPokemon=493
+          break;
+        case 5:
+            this.maxPokemon=649
+          break;
+        case 6:
+            this.maxPokemon=721
+          break;
+        case 7:
+            this.maxPokemon=809
+          break;
+        default:
+            this.maxPokemon=151
+          break;
+      }
+    },
+    setDifficulty(val){
+      this.difficulty = val
     }
   }
 }
