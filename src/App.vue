@@ -1,22 +1,21 @@
 <template>
   <h1 class="text-center mt-3">who Is this Pokemon</h1>
   <p class="text-center">Game about, guess what pokemon it is. By: Fernando Piedra Mendez &lt;OnlyKal&gt;</p>
+  <div class="d-flex justify-content-evenly">
+    <div class="w-25">
+      <NumberComponent @changeNumber="setGeneration($event)" maxNumber="7" title="Generation"/>
+    </div>
+    <div class="w-25">
+      <NumberComponent @changeNumber="setDifficulty($event)" maxNumber="2" title="Difficulty"/>
+    </div>
+  </div>
   <div class="d-flex justify-content-center mt-3">
     <h3 class="m-3">hits: {{corrects}}</h3>
     <h3 class="m-3">mistakes: {{errors}}</h3>
   </div>
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
-      <div class="d-flex justify-content-center mt-5">
-        <Pokemon :nombre="nameAnsware" :img="img" :status="status"/>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="d-flex justify-content-center flex-column">
-        <NumberComponent @changeNumber="setGeneration($event)" maxNumber="7" title="Generation"/>
-        <NumberComponent @changeNumber="setDifficulty($event)" maxNumber="2" title="Difficulty"/>
-      </div>
+  <div>
+    <div class="d-flex justify-content-center mt-1">
+      <Pokemon :nombre="nameAnsware" :img="img" :status="status"/>
     </div>
   </div>
   <h2 class="text-center mt-3">who is?</h2>
