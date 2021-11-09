@@ -15,27 +15,25 @@
     <div class="col-2">
       <div class="d-flex justify-content-center flex-column">
         <NumberComponent @changeNumber="setGeneration($event)" maxNumber="7" title="Generation"/>
-        <NumberComponent @changeNumber="setDifficulty($event)" maxNumber="2" title="Difficulty" class="m-3"/>
+        <NumberComponent @changeNumber="setDifficulty($event)" maxNumber="2" title="Difficulty"/>
       </div>
     </div>
   </div>
   <h2 class="text-center mt-3">who is?</h2>
-  <div class="d-flex justify-content-center mt-5">
-    <button type="button" class="btn btn-outline-secondary m-2" @click="check1">{{name1}}</button>
-    <button type="button" class="btn btn-outline-secondary m-2" @click="check2">{{name2}}</button>
-    <button type="button" class="btn btn-outline-secondary m-2" @click="check3">{{name3}}</button>
-  </div>
+  <OptionsComponent :name1="name1" :name2="name2" :name3="name3" @check="check($event)"/>
 </template>
 
 <script>
 import Pokemon from "./components/Pokemon.vue";
 import NumberComponent from "./components/NumberComponent.vue"
+import OptionsComponent from "./components/OptionsComponent.vue"
 
 export default {
   name: 'App',
   components: {
     Pokemon,
-    NumberComponent
+    NumberComponent,
+    OptionsComponent
   },
   data(){
     return{
@@ -102,28 +100,8 @@ export default {
           }
         })
     },
-    check1(){
-      if(this.nameAnsware === this.name1){
-        this.corrects ++;
-        this.status = 'correct'
-      }else{
-        this.errors ++;
-        this.status = 'mistake'
-      }
-      this.restartName()
-    },
-    check2(){
-      if(this.nameAnsware === this.name2){
-        this.corrects ++;
-        this.status = 'correct'
-      }else{
-        this.errors ++;
-        this.status = 'mistake'
-      }
-      this.restartName()
-    },
-    check3(){
-      if(this.nameAnsware === this.name3){
+    check(val){
+      if(this.nameAnsware === val){
         this.corrects ++;
         this.status = 'correct'
       }else{

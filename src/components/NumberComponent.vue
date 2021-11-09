@@ -31,6 +31,7 @@
 export default {
     name:'NumberComponent',
     props: ['maxNumber','title'],
+    emits:['changeNumber'],
     data(){
         return{
             number:1
